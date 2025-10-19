@@ -52,15 +52,15 @@ pipelines:
                     run_if: passed
 
       - PROD: # name of stage
-        fetch_materials: true
-        approval:
-          type: manual
-        jobs:
-          ansible:
-            timeout: 0
-            tasks:
-              - exec:
-                  arguments:
-                    - -l
-                  command: ls
-                  run_if: passed
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            ansible:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - -l
+                    command: ls
+                    run_if: passed
