@@ -7,100 +7,24 @@ pipelines:
     display_order: -1
     materials:
       git-0581b96:
-        git: https://github.com/Khaleel221/Expense-Ansible.git
-        shallow_clone: true
+        git: https://github.com/Khaleel221/Expense-ansible.git
+        shallow_clone: false
         auto_update: true
         branch: main
     stages:
-      - DEV: # name of stage
+      - DEV:
           fetch_materials: true
-          jobs:
-            ansible:
-              timeout: 0
-              tasks:
-                - exec:
-                    command: ansible-playbook
-                    arguments:
-                      - -i
-                      - frontend-dev.khaleel221.shop,
-                      - -e
-                      - ansible_user=ec2-user
-                      - -e
-                      - ansible_password=Devops321
-                      - -e
-                      - env=dev
-                      - -e
-                      - role_name=backend
-                      - expense.yml
-
-      - QA: # name of stage
-          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
           approval:
-            type: manual
+            type: success
+            allow_only_on_success: false
           jobs:
-            ansible:
+            test-j:
               timeout: 0
               tasks:
                 - exec:
-                    command: ansible-playbook
                     arguments:
-                      - -i
-                      - frontend-dev.khaleel221.shop,
-                      - -e
-                      - ansible_user=ec2-user
-                      - -e
-                      - ansible_password=Devops321
-                      - -e
-                      - env=dev
-                      - -e
-                      - role_name=backend
-                      - expense.yml
-                    run_if: passed
-
-      - STAGE: # name of stage
-          fetch_materials: true
-          approval:
-            type: manual
-          jobs:
-            ansible:
-              timeout: 0
-              tasks:
-                - exec:
-                    command: ansible-playbook
-                    arguments:
-                      - -i
-                      - frontend-dev.khaleel221.shop,
-                      - -e
-                      - ansible_user=ec2-user
-                      - -e
-                      - ansible_password=Devops321
-                      - -e
-                      - env=dev
-                      - -e
-                      - role_name=backend
-                      - expense.yml
-                    run_if: passed
-
-      - PROD: # name of stage
-          fetch_materials: true
-          approval:
-            type: manual
-          jobs:
-            ansible:
-              timeout: 0
-              tasks:
-                - exec:
-                    command: ansible-playbook
-                    arguments:
-                      - -i
-                      - frontend-dev.khaleel221.shop,
-                      - -e
-                      - ansible_user=ec2-user
-                      - -e
-                      - ansible_password=Devops321
-                      - -e
-                      - env=dev
-                      - -e
-                      - role_name=backend
-                      - expense.yml
+                      - --version
+                    command: ansible
                     run_if: passed
