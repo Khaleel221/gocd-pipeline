@@ -14,17 +14,93 @@ pipelines:
     stages:
       - DEV:
           fetch_materials: true
-          keep_artifacts: false
-          clean_workspace: false
-          approval:
-            type: success
-            allow_only_on_success: false
           jobs:
-            DEV:
+            Ansible:
               timeout: 0
               tasks:
                 - exec:
                     arguments:
-                      - --version
-                    command: ansible
+                      - -i
+                      - mysql-dev.khaleel221.shop,
+                      - -e
+                      - ansible_user=ec2-user
+                      - -e
+                      - ansible_password=DevOps321
+                      - -e
+                      - env=dev
+                      - -e
+                      - role_name=mysql
+                      - expense.yml
+                    command: ansible-playbook
+
+      - QA:
+          fetch_materials: true
+          approval:
+            type: success
+          jobs:
+            Ansible:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - -i
+                      - mysql-dev.khaleel221.shop,
+                      - -e
+                      - ansible_user=ec2-user
+                      - -e
+                      - ansible_password=DevOps321
+                      - -e
+                      - env=dev
+                      - -e
+                      - role_name=mysql
+                      - expense.yml
+                    command: ansible-playbook
+                    run_if: passed
+
+      - STAGE:
+          fetch_materials: true
+          approval:
+            type: success
+          jobs:
+            Ansible:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - -i
+                      - mysql-dev.khaleel221.shop,
+                      - -e
+                      - ansible_user=ec2-user
+                      - -e
+                      - ansible_password=DevOps321
+                      - -e
+                      - env=dev
+                      - -e
+                      - role_name=mysql
+                      - expense.yml
+                    command: ansible-playbook
+                    run_if: passed
+
+      - PROD:
+          fetch_materials: true
+          approval:
+            type: success
+          jobs:
+            Ansible:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - -i
+                      - mysql-dev.khaleel221.shop,
+                      - -e
+                      - ansible_user=ec2-user
+                      - -e
+                      - ansible_password=DevOps321
+                      - -e
+                      - env=dev
+                      - -e
+                      - role_name=mysql
+                      - expense.yml
+                    command: ansible-playbook
                     run_if: passed
