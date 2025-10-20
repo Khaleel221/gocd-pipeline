@@ -15,4 +15,4 @@ pipelines:
       SSH_PASSWORD: "AES:HouDbUqrHm6wO/DVEkB59Q==:Xhmhx3vW4sbcZgqjc293qw=="
     environment_variables:
       component: backend
-    templates: app-deployment
+    template: app-deployment
