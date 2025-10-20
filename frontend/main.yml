@@ -18,8 +18,10 @@ pipelines:
     stages:
       - DEV:
           fetch_materials: true
+          approval:
+            type: manual
           environment_variables:
-            env: DEV
+            env: dev
           jobs:
             Ansible:
               timeout: 0
@@ -32,7 +34,7 @@ pipelines:
       - QA:
           fetch_materials: true
           environment_variables:
-            env: QA
+            env: qa
           approval:
             type: manual
           jobs:
@@ -48,7 +50,7 @@ pipelines:
       - STAGE:
           fetch_materials: true
           environment_variables:
-            env: STAGE
+            env: stage
           approval:
             type: manual
           jobs:
@@ -64,7 +66,7 @@ pipelines:
       - PROD:
           fetch_materials: true
           environment_variables:
-            env: PROD
+            env: prod
           approval:
             type: manual
           jobs:
