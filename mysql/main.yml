@@ -20,11 +20,11 @@ pipelines:
             type: success
             allow_only_on_success: false
           jobs:
-            test-j:
+            DEV:
               timeout: 0
               tasks:
                 - exec:
                     arguments:
                       - --version
-                    command: /home/ec2-user/.local/bin/ansible
+                    command: ansible
                     run_if: passed
