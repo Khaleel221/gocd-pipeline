@@ -31,7 +31,7 @@ pipelines:
                       - -e
                       - role_name=backend
                       - expense.yml
-                    command: ansible
+                    command: ansible-playbook
 
       - QA:
           fetch_materials: true
@@ -54,7 +54,7 @@ pipelines:
                       - -e
                       - role_name=backend
                       - expense.yml
-                    command: ansible-plybook
+                    command: ansible-playbook
                     run_if: passed
 
       - STAGE:
@@ -78,7 +78,7 @@ pipelines:
                       - -e
                       - role_name=backend
                       - expense.yml
-                    command: ansible
+                    command: ansible-playbook
                     run_if: passed
 
       - PROD:
@@ -102,5 +102,5 @@ pipelines:
                       - -e
                       - role_name=backend
                       - expense.yml
-                    command: ansible
+                    command: ansible-playbook
                     run_if: passed
