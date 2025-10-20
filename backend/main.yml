@@ -19,10 +19,9 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                    command: ansible-playbook
                     arguments:
-                      - -i
-                      - backend-dev.khaleel221.shop,
+                      - i
+                      - mysql-dev.khaleel221.shop,
                       - -e
                       - ansible_user=ec2-user
                       - -e
@@ -32,6 +31,7 @@ pipelines:
                       - -e
                       - role_name=backend
                       - expense.yml
+                    command: ansible-playbook
 
       - QA: # name of stage
           fetch_materials: true
@@ -42,9 +42,8 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                    command: ansible-playbook
                     arguments:
-                      - -i
+                      - i
                       - backend-dev.khaleel221.shop,
                       - -e
                       - ansible_user=ec2-user
@@ -55,7 +54,8 @@ pipelines:
                       - -e
                       - role_name=backend
                       - expense.yml
-                    run_if: passed
+                  command: ansible-playbook
+                  run_if: passed
 
       - STAGE: # name of stage
           fetch_materials: true
@@ -66,9 +66,8 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                    command: ansible-playbook
                     arguments:
-                      - -i
+                      - i
                       - backend-dev.khaleel221.shop,
                       - -e
                       - ansible_user=ec2-user
@@ -79,6 +78,7 @@ pipelines:
                       - -e
                       - role_name=backend
                       - expense.yml
+                    command: ansible-playbook
                     run_if: passed
 
       - PROD: # name of stage
@@ -90,9 +90,8 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                    command: ansible-playbook
                     arguments:
-                      - -i
+                      - i
                       - backend-dev.khaleel221.shop,
                       - -e
                       - ansible_user=ec2-user
@@ -103,4 +102,5 @@ pipelines:
                       - -e
                       - role_name=backend
                       - expense.yml
+                    command: ansible-playbook
                     run_if: passed
