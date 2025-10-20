@@ -11,30 +11,30 @@ pipelines:
         shallow_clone: false
         auto_update: true
         branch: main
+    secure_variables:
+      SSH_PASSWORD: "AES:HouDbUqrHm6wO/DVEkB59Q==:Xhmhx3vW4sbcZgqjc293qw=="
+    environment_variables:
+      component: backend
     stages:
       - DEV:
           fetch_materials: true
+          environment_variables:
+            env: DEV
           jobs:
             Ansible:
               timeout: 0
               tasks:
                 - exec:
                     arguments:
-                      - -i
-                      - backend-dev.khaleel221.shop,
-                      - -e
-                      - ansible_user=ec2-user
-                      - -e
-                      - ansible_password=DevOps321
-                      - -e
-                      - env=dev
-                      - -e
-                      - role_name=backend
-                      - expense.yml
+                      arguments:
+                        - run.sh
+                      command: bash
                     command: ansible-playbook
 
       - QA:
           fetch_materials: true
+          environment_variables:
+            env: QA
           approval:
             type: success
           jobs:
@@ -43,22 +43,14 @@ pipelines:
               tasks:
                 - exec:
                     arguments:
-                      - -i
-                      - backend-dev.khaleel221.shop,
-                      - -e
-                      - ansible_user=ec2-user
-                      - -e
-                      - ansible_password=DevOps321
-                      - -e
-                      - env=dev
-                      - -e
-                      - role_name=backend
-                      - expense.yml
-                    command: ansible-playbook
+                      - run.sh
+                    command: bash
                     run_if: passed
 
       - STAGE:
           fetch_materials: true
+          environment_variables:
+            env: STAGE
           approval:
             type: success
           jobs:
@@ -67,22 +59,14 @@ pipelines:
               tasks:
                 - exec:
                     arguments:
-                      - -i
-                      - backend-dev.khaleel221.shop,
-                      - -e
-                      - ansible_user=ec2-user
-                      - -e
-                      - ansible_password=DevOps321
-                      - -e
-                      - env=dev
-                      - -e
-                      - role_name=backend
-                      - expense.yml
-                    command: ansible-playbook
+                      - run.sh
+                    command: bash
                     run_if: passed
 
       - PROD:
           fetch_materials: true
+          environment_variables:
+            env: PROD
           approval:
             type: success
           jobs:
@@ -91,16 +75,6 @@ pipelines:
               tasks:
                 - exec:
                     arguments:
-                      - -i
-                      - backend-dev.khaleel221.shop,
-                      - -e
-                      - ansible_user=ec2-user
-                      - -e
-                      - ansible_password=DevOps321
-                      - -e
-                      - env=dev
-                      - -e
-                      - role_name=backend
-                      - expense.yml
-                    command: ansible-playbook
+                      - run.sh
+                    command: bash
                     run_if: passed
