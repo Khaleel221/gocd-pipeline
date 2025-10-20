@@ -11,14 +11,24 @@ pipelines:
         shallow_clone: true
         auto_update: true
         branch: main
-    stages:
-      - DEV: # name of stage
-          fetch_materials: true
-          jobs:
-            ansible:
-              timeout: 0
-              tasks:
-                - exec:
-                    arguments:
-                      - --version
-                    command: ansible
+stages:
+  - DEV:
+      fetch_materials: true
+      jobs:
+        ansible:
+          timeout: 0
+          tasks:
+            - exec:
+                command: /home/ec2-user/.local/bin/ansible-playbook
+                arguments:
+                  - -i
+                  - backend-dev.khaleel221.shop,
+                  - -e
+                  - ansible_user=ec2-user
+                  - -e
+                  - ansible_password=DevOps321
+                  - -e
+                  - env=dev
+                  - -e
+                  - role_name=backend
+                  - expense.yml
