@@ -34,7 +34,7 @@ pipelines:
           environment_variables:
             env: QA
           approval:
-            type: success
+            type: manual
           jobs:
             Ansible:
               timeout: 0
@@ -50,7 +50,7 @@ pipelines:
           environment_variables:
             env: STAGE
           approval:
-            type: success
+            type: manual
           jobs:
             Ansible:
               timeout: 0
@@ -66,7 +66,7 @@ pipelines:
           environment_variables:
             env: PROD
           approval:
-            type: success
+            type: manual
           jobs:
             Ansible:
               timeout: 0
