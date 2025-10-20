@@ -19,9 +19,19 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
+                    command: ansible-playbook
                     arguments:
-                      - -l
-                    command: ls
+                      - -i
+                      - mysql-dev.khaleel221.shop,
+                      - -e
+                      - ansible_user=ec2-user
+                      - -e
+                      - ansible_password=Devops321
+                      - -e
+                      - env=dev
+                      - -e
+                      - role_name=backend
+                      - expense.yml
 
       - QA: # name of stage
           fetch_materials: true
@@ -32,9 +42,19 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
+                    command: ansible-playbook
                     arguments:
-                      - -l
-                    command: ls
+                      - -i
+                      - mysql-dev.khaleel221.shop,
+                      - -e
+                      - ansible_user=ec2-user
+                      - -e
+                      - ansible_password=Devops321
+                      - -e
+                      - env=dev
+                      - -e
+                      - role_name=backend
+                      - expense.yml
                     run_if: passed
 
       - STAGE: # name of stage
@@ -46,9 +66,19 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
+                    command: ansible-playbook
                     arguments:
-                      - -l
-                    command: ls
+                      - -i
+                      - mysql-dev.khaleel221.shop,
+                      - -e
+                      - ansible_user=ec2-user
+                      - -e
+                      - ansible_password=Devops321
+                      - -e
+                      - env=dev
+                      - -e
+                      - role_name=backend
+                      - expense.yml
                     run_if: passed
 
       - PROD: # name of stage
@@ -60,7 +90,17 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
+                    command: ansible-playbook
                     arguments:
-                      - -l
-                    command: ls
+                      - -i
+                      - mysql-dev.khaleel221.shop,
+                      - -e
+                      - ansible_user=ec2-user
+                      - -e
+                      - ansible_password=Devops321
+                      - -e
+                      - env=dev
+                      - -e
+                      - role_name=backend
+                      - expense.yml
                     run_if: passed
