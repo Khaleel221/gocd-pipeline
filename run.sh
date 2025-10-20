@@ -1,1 +1,0 @@
-anible-playbook -i ${component}-${env}.khaleel221.shop, -e ansible_user=ec2-user -e ansible_pasword=${SSH_PASSWORD} -e role_name=${component} -e env=dev expense.yml
