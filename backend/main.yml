@@ -26,10 +26,8 @@ pipelines:
               tasks:
                 - exec:
                     arguments:
-                      arguments:
-                        - run.sh
-                      command: bash
-                    command: ansible-playbook
+                      - run.sh
+                    command: bash
 
       - QA:
           fetch_materials: true
