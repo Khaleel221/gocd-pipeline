@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  ansible-app-deployment:
+  ansible-deployment:
     group: Templates
     label_template: ${COUNT}
     lock_behavior: none
