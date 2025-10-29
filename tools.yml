@@ -1,0 +1,30 @@
+format_version: 10
+pipelines:
+  tools-create:
+    group: terraform
+    label_template: ${COUNT}
+    lock_behavior: none
+    materials:
+      git-0581b96:
+        git: https://github.com/Khaleel221/tools-automation.git
+        branch: main
+        auto_update: true
+    secure_variables:
+      SSH_PASSWORD: "AES:HouDbUqrHm6wO/DVEkB59Q==:Xhmhx3vW4sbcZgqjc293qw=="
+
+    stages:
+      - create:
+          approval: { type: manual }
+          jobs:
+            terraform:
+              tasks:
+                - exec:
+                    command: terraform
+                    arguments:
+                      - init
+                - exec:
+                    run_if: passed
+                    command: terraform
+                    arguments:
+                      - apply
+                      - -auto-approve
