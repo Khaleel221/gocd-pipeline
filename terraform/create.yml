@@ -1,0 +1,54 @@
+format_version: 10
+pipelines:
+  expense-create:
+    group: terraform
+    label_template: ${COUNT}
+    lock_behavior: none
+    materials:
+      git-0581b96:
+        git: https://github.com/Khaleel221/expense-terraform.git
+        branch: main
+        auto_update: true
+    secure_variables:
+      SSH_PASSWORD: "AES:HouDbUqrHm6wO/DVEkB59Q==:Xhmhx3vW4sbcZgqjc293qw=="
+
+    stages:
+      - DEV:
+          approval: { type: manual }
+          jobs:
+            terraform:
+              tasks:
+                - exec:
+                    command: terraform
+                    arguments:
+                      - init
+                      - -backend-config
+                      - env-dev/state.tfvars
+                - exec:
+                    run_if: passed
+                    command: terraform
+                    arguments:
+                      - apply
+                      - -var-file
+                      - env-dev/main.tfvars
+                      - -auto-approve
+
+      - PROD:
+          approval: { type: manual }
+          jobs:
+            terraform:
+              tasks:
+                - exec:
+                    command: terraform
+                    arguments:
+                      - init
+                      - -backend-config
+                      - env-prod/state.tfvars
+                - exec:
+                    run_if: passed
+                    command: terraform
+                    arguments:
+                      - apply
+                      - -var-file
+                      - env-prod/main.tfvars
+                      - -auto-approve
